@@ -21,10 +21,20 @@ module.exports = new Script({
             const name = message.text;
             return bot.setProp('name', name)
                 .then(() => bot.say(`Great! I'll call you ${name}`))
-                .then(() => 'finish');
+                .then(() => 'askType');
         }
     },
 
+    askType: {
+        prompt: (bot) => bot.say('Are you a real estate agent?'),
+        receive: (bot, message) => {
+            const name = message.text;
+            return bot.setProp('name', name)
+                .then(() => bot.say(`Cool beans.`))
+                .then(() => 'finish');
+        }
+    },
+    
     finish: {
         receive: (bot, message) => {
             return bot.getProp('name')
